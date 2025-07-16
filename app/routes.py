@@ -1,11 +1,14 @@
-from flask import render_template, request, redirect, url_for, session, flash
+from flask import flash, redirect, render_template, request, session, url_for
+
 from app import app
 
 users = {}
 
+
 @app.route('/')
 def home():
     return render_template('home.html')
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -20,6 +23,7 @@ def login():
             flash('Invalid credentials!')
     return render_template('login.html')
 
+
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
@@ -30,6 +34,7 @@ def signup():
         flash('Signup successful! Please login.')
         return redirect(url_for('login'))
     return render_template('signup.html')
+
 
 @app.route('/logout')
 def logout():
